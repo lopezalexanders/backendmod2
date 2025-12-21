@@ -1,7 +1,7 @@
 drop schema if exists public cascade;
 create schema public;
 
-create table cliente(
+create table clientes(
     id serial primary key,
     nombre varchar default '',
     paterno varchar default '',
@@ -13,7 +13,7 @@ create table cliente(
     fecha_creacion timestamp default current_timestamp
 );
 
-create table cuenta(
+create table cuentas(
     id serial primary key,
     cliente_id integer,
     tipo_producto varchar default '',
@@ -22,5 +22,5 @@ create table cuenta(
     monto decimal(12,2) default 0.00,
     fecha_creacion timestamp default current_timestamp,
     sucursal varchar default 'La Paz',
-    foreign key (cliente_id) references cliente(id)
+    foreign key (cliente_id) references clientes(id)
 );
