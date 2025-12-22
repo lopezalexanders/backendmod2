@@ -11,7 +11,7 @@ import {
 export class Cuenta {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ type: 'int', default: 0 })
+  @Column({ type: 'varchar', default: 0 })
   tipo_producto: string;
   @Column({ type: 'int', unique: true })
   numero_cuenta: number;
@@ -24,7 +24,7 @@ export class Cuenta {
   @Column({ type: 'varchar', length: 100, default: '' })
   sucursal: string;
 
-  @ManyToOne(() => Cliente, (cliente) => cliente.cuenta)
+  @ManyToOne(() => Cliente, (cliente) => cliente.cuenta, { eager: true })
   @JoinColumn({ name: 'cliente_id' })
   cliente: Cliente;
 }

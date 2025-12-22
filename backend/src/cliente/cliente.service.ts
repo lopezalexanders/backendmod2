@@ -9,7 +9,7 @@ import { Cliente } from './entities/cliente.entity';
 export class ClienteService {
   constructor(
     @InjectRepository(Cliente)
-    private clienteRepository: Repository<Cliente>,
+    private readonly clienteRepository: Repository<Cliente>,
   ) {}
   create(createClienteDto: CreateClienteDto) {
     const cliente = this.clienteRepository.create({

@@ -23,7 +23,11 @@ export class CreateClienteDto {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsNotEmpty()
   paterno: string;
-
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @ApiProperty({
+    example: 'Gonzalez',
+    description: 'Apellido Materno',
+  })
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @ApiProperty({
     example: 'Gonzalez',
@@ -34,7 +38,6 @@ export class CreateClienteDto {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsNotEmpty()
   materno: string;
-
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @ApiProperty({
     example: 1,
@@ -45,11 +48,30 @@ export class CreateClienteDto {
   tipo_documento: number;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @ApiProperty({
+    example: '12345678',
+    description: 'Número de Documento de Identidad',
+  })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @IsNotEmpty()
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsString()
   documento_identidad: string;
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @ApiProperty({
+    example: '1990-01-01',
+    description: 'Fecha de Nacimiento',
+  })
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @IsNotEmpty()
   fecha_nacimiento: Date;
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  @ApiProperty({
+    example: 'Masculino',
+    description: 'Género',
+  })
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   @IsString()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
