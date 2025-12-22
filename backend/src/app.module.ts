@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClienteModule } from './cliente/cliente.module';
+import { CuentaModule } from './cuenta/cuenta.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -10,7 +12,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: '123456',
       database: 'backenddb',
       autoLoadEntities: true,
+      synchronize: true,
     }),
+    ClienteModule,
+    CuentaModule,
   ],
   controllers: [],
   providers: [],
