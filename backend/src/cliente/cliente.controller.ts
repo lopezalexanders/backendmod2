@@ -6,22 +6,41 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateCuentaClienteDto } from 'src/cliente/dto/create-cuenta-cliente.dto';
 @ApiTags('Cliente')
 @Controller('api/v1/cliente')
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) {}
 
+  @Post(':id/cuenta')
+  @ApiOperation({ summary: 'Crear una nueva cuenta para un cliente' })
+  @ApiResponse({ status: 201, description: 'Cuenta creada exitosamente' })
+  @ApiResponse({ status: 404, description: 'Cliente no encontrado' })
+  async createCuenta(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() createCuentaDto: CreateCuentaClienteDto,
+  ) {
+    // Construir el CreateCuentaDto agregando el cliente_id
+    const createCuenta: any = {
+      ...createCuentaDto,
+      cliente_id: id,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    return await this.clienteService.createCuentados(id, createCuenta);
+  }
+
   @Post()
   @ApiOperation({ summary: 'Crear un nuevo cliente' })
   @ApiResponse({ status: 201, description: 'Cliente creado exitosamente' })
   @ApiResponse({ status: 400, description: 'Error al crear el cliente' })
-  create(@Body() createClienteDto: CreateClienteDto) {
-    return this.clienteService.create(createClienteDto);
+  async create(@Body() createClienteDto: CreateClienteDto) {
+    return await this.clienteService.create(createClienteDto);
   }
 
   @Get()
@@ -33,6 +52,13 @@ export class ClienteController {
   })
   async findAll() {
     return await this.clienteService.findAll();
+  }
+
+  @Get(':id/cuenta')
+  @ApiOperation({ summary: 'Listar todas las cuentas de un cliente' })
+  @ApiResponse({ status: 200, description: 'Lista de cuentas obtenida.' })
+  async getCuentas(@Param('id', ParseIntPipe) id: number) {
+    return await this.clienteService.findCuentasByCliente(id);
   }
 
   @Get(':id')
