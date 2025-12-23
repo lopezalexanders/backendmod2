@@ -16,6 +16,7 @@ async function bootstrap() {
     .setTitle('API Backend Final')
     .setDescription('API para el proyecto final del modulo 2')
     .setVersion('1.0')
+    .addTag('usuario')
     .addTag('cuenta')
     .build();
   const document = SwaggerModule.createDocument(app, config);

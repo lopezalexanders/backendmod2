@@ -11,9 +11,15 @@ import {
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiExtraModels,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateCuentaClienteDto } from 'src/cliente/dto/create-cuenta-cliente.dto';
 @ApiTags('Cliente')
+@ApiExtraModels(CreateCuentaClienteDto, CreateClienteDto, UpdateClienteDto)
 @Controller('api/v1/cliente')
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) {}
